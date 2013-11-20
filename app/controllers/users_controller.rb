@@ -9,6 +9,7 @@ before_action :admin_user,     only: :destroy
   
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   
   def new
@@ -68,4 +69,5 @@ before_action :admin_user,     only: :destroy
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
 end
